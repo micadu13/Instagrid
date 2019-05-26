@@ -42,11 +42,64 @@
                                             </label>
                                         </subviews>
                                     </stackView>
-                                    <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="unX-ma-8ca">
-                                        <rect key="frame" x="16" y="143" width="282" height="273"/>
+                                    <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="UDz-Sc-37Z" userLabel="Stack Grille">
+                                        <rect key="frame" x="12" y="138" width="296" height="273"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                        <color key="backgroundColor" red="0.0" green="0.4039522707" blue="0.6116856933" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                    </view>
+                                        <subviews>
+                                            <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="unX-ma-8ca" userLabel="View- Grille">
+                                                <rect key="frame" x="0.0" y="0.0" width="296" height="273"/>
+                                                <subviews>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" spacing="18" translatesAutoresizingMaskIntoConstraints="NO" id="4Gv-DJ-95j">
+                                                        <rect key="frame" x="12" y="8" width="273" height="127.5"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AZn-Uo-JxQ">
+                                                                <rect key="frame" x="0.0" y="0.0" width="127.5" height="127.5"/>
+                                                                <state key="normal" image="Combined Shape" backgroundImage="Rectangle 3"/>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ag5-C4-Uc6">
+                                                                <rect key="frame" x="145.5" y="0.0" width="127.5" height="127.5"/>
+                                                                <state key="normal" image="Combined Shape" backgroundImage="Rectangle 3"/>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                    <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" spacing="17" translatesAutoresizingMaskIntoConstraints="NO" id="4HH-ne-juN">
+                                                        <rect key="frame" x="12" y="143" width="272" height="127.5"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <subviews>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="45Q-xe-h08">
+                                                                <rect key="frame" x="0.0" y="0.0" width="127.5" height="127.5"/>
+                                                                <state key="normal" image="Combined Shape" backgroundImage="Rectangle 3"/>
+                                                            </button>
+                                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ejv-Ul-4pe">
+                                                                <rect key="frame" x="144.5" y="0.0" width="127.5" height="127.5"/>
+                                                                <state key="normal" image="Combined Shape" backgroundImage="Rectangle 3"/>
+                                                            </button>
+                                                        </subviews>
+                                                    </stackView>
+                                                </subviews>
+                                                <color key="backgroundColor" red="0.0" green="0.4039522707" blue="0.6116856933" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </view>
+                                        </subviews>
+                                    </stackView>
+                                    <stackView opaque="NO" contentMode="scaleToFill" fixedFrame="YES" distribution="fillEqually" alignment="center" spacing="21" translatesAutoresizingMaskIntoConstraints="NO" id="Pm6-XS-3ID">
+                                        <rect key="frame" x="17" y="448" width="282" height="80"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="THK-ib-D3H">
+                                                <rect key="frame" x="0.0" y="0.0" width="80" height="80"/>
+                                                <state key="normal" image="Layout 1"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="czd-zC-LGa">
+                                                <rect key="frame" x="101" y="0.0" width="80" height="80"/>
+                                                <state key="normal" image="Layout 2"/>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fma-e1-EUW">
+                                                <rect key="frame" x="202" y="0.0" width="80" height="80"/>
+                                                <state key="normal" image="Layout 3"/>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.74342805150000002" green="0.83824926609999995" blue="0.89020633699999996" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                             </view>
@@ -67,6 +120,11 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Combined Shape" width="40" height="40"/>
+        <image name="Layout 1" width="80" height="80"/>
+        <image name="Layout 2" width="80" height="80"/>
+        <image name="Layout 3" width="80" height="80"/>
+        <image name="Rectangle 3" width="127.5" height="127.5"/>
         <image name="arrow_up" width="13.5" height="9.5"/>
     </resources>
 </document>
