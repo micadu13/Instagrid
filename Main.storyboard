@@ -25,7 +25,10 @@
                                         <rect key="frame" x="20" y="452" width="280" height="82"/>
                                         <subviews>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="THK-ib-D3H" userLabel="FirstButton">
-                                                <rect key="frame" x="0.0" y="1" width="79.5" height="80"/>
+                                                <rect key="frame" x="0.0" y="1.5" width="79.5" height="79"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="THK-ib-D3H" secondAttribute="height" multiplier="1:1" id="aui-de-wXQ"/>
+                                                </constraints>
                                                 <state key="normal" image="Layout 1" backgroundImage="Layout 1"/>
                                                 <state key="selected" image="Selected" backgroundImage="Layout 1"/>
                                                 <connections>
@@ -33,7 +36,10 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="czd-zC-LGa" userLabel="SecondButton">
-                                                <rect key="frame" x="100.5" y="1" width="79" height="80"/>
+                                                <rect key="frame" x="100.5" y="1.5" width="79" height="79"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="czd-zC-LGa" secondAttribute="height" multiplier="1:1" id="y5X-ig-Ohv"/>
+                                                </constraints>
                                                 <state key="normal" backgroundImage="Layout 2"/>
                                                 <state key="selected" image="Selected" backgroundImage="Layout 2"/>
                                                 <connections>
@@ -41,7 +47,10 @@
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fma-e1-EUW" userLabel="ThirdButton">
-                                                <rect key="frame" x="200.5" y="1" width="79.5" height="80"/>
+                                                <rect key="frame" x="200.5" y="1.5" width="79.5" height="79"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" secondItem="fma-e1-EUW" secondAttribute="height" multiplier="1:1" id="CB5-dR-u8G"/>
+                                                </constraints>
                                                 <state key="normal" backgroundImage="Layout 3"/>
                                                 <state key="selected" image="Selected" backgroundImage="Layout 3"/>
                                                 <connections>
