@@ -121,6 +121,7 @@
                                                                 </variation>
                                                             </button>
                                                         </subviews>
+                                                        <variation key="heightClass=compact" axis="horizontal"/>
                                                     </stackView>
                                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="4HH-ne-juN" userLabel="SecondStackPict">
                                                         <rect key="frame" x="8" y="140" width="264" height="128"/>
@@ -327,6 +328,11 @@
                                         <exclude reference="6et-Ud-8Kl"/>
                                         <exclude reference="8iU-dk-Us1"/>
                                         <exclude reference="d58-2c-nXv"/>
+                                        <exclude reference="MdJ-ez-08I"/>
+                                        <exclude reference="WBy-WB-vMf"/>
+                                        <exclude reference="bci-XV-3dI"/>
+                                        <exclude reference="i3U-fL-4KP"/>
+                                        <exclude reference="mm4-Vq-VgG"/>
                                         <exclude reference="8rb-cj-pIo"/>
                                         <exclude reference="BSB-gf-fuP"/>
                                         <exclude reference="Myj-vo-v3Z"/>
@@ -336,11 +342,6 @@
                                         <exclude reference="cmh-hs-Mqi"/>
                                         <exclude reference="dGC-uW-BDj"/>
                                         <exclude reference="mRT-qe-7Vh"/>
-                                        <exclude reference="MdJ-ez-08I"/>
-                                        <exclude reference="WBy-WB-vMf"/>
-                                        <exclude reference="bci-XV-3dI"/>
-                                        <exclude reference="i3U-fL-4KP"/>
-                                        <exclude reference="mm4-Vq-VgG"/>
                                         <exclude reference="xrv-oN-ITN"/>
                                         <exclude reference="zTu-r4-pgZ"/>
                                     </mask>
@@ -355,6 +356,15 @@
                                         <exclude reference="YFj-OG-ymY"/>
                                         <include reference="d58-2c-nXv"/>
                                         <exclude reference="w9s-9I-ZYG"/>
+                                        <exclude reference="5rX-g3-j0O"/>
+                                        <exclude reference="MdJ-ez-08I"/>
+                                        <exclude reference="V8e-ta-jEh"/>
+                                        <include reference="WBy-WB-vMf"/>
+                                        <exclude reference="bci-XV-3dI"/>
+                                        <exclude reference="i3U-fL-4KP"/>
+                                        <include reference="mm4-Vq-VgG"/>
+                                        <exclude reference="rTX-Yq-qMc"/>
+                                        <exclude reference="uzJ-Qm-wJk"/>
                                         <exclude reference="0h3-5n-ugD"/>
                                         <exclude reference="8ha-XS-bar"/>
                                         <include reference="8rb-cj-pIo"/>
@@ -366,15 +376,6 @@
                                         <exclude reference="cmh-hs-Mqi"/>
                                         <include reference="dGC-uW-BDj"/>
                                         <exclude reference="mRT-qe-7Vh"/>
-                                        <exclude reference="5rX-g3-j0O"/>
-                                        <exclude reference="MdJ-ez-08I"/>
-                                        <exclude reference="V8e-ta-jEh"/>
-                                        <include reference="WBy-WB-vMf"/>
-                                        <exclude reference="bci-XV-3dI"/>
-                                        <exclude reference="i3U-fL-4KP"/>
-                                        <include reference="mm4-Vq-VgG"/>
-                                        <exclude reference="rTX-Yq-qMc"/>
-                                        <exclude reference="uzJ-Qm-wJk"/>
                                         <exclude reference="48S-KC-MHW"/>
                                         <exclude reference="9oU-5k-0Yh"/>
                                         <exclude reference="KVA-5l-pG9"/>
