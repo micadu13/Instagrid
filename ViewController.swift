@@ -11,10 +11,10 @@ import UIKit
 class ViewController: UIViewController {
     
     //Outlets
-    @IBOutlet weak var FirstPicture: UIButton!
-    @IBOutlet weak var SecondPicture: UIButton!
-    @IBOutlet weak var ThirdPicture: UIButton!
-    @IBOutlet weak var FourthPicture: UIButton!
+    @IBOutlet weak var firstPicture: UIButton!
+    @IBOutlet weak var secondPicture: UIButton!
+    @IBOutlet weak var thirdPicture: UIButton!
+    @IBOutlet weak var fourthPicture: UIButton!
     @IBOutlet weak var toswipe: UILabel!
 
     override func viewDidLoad() {
@@ -25,32 +25,48 @@ class ViewController: UIViewController {
     //Actions
 
     
-    @IBAction func FirstButton() {
-       firstbuttonactivated()
+    @IBAction func firstButton() {
+      firstButtonctivated()
        
         
     }
     
-    @IBAction func SecondButton(_ sender: Any) {
-    }
     
-    @IBAction func ThirdButton(_ sender: Any) {
+    @IBAction func secondButton() {
+         secondButtonactivated()
+    }
+    @IBAction func ThirdButton() {
+        thirdButtonactivated()
     }
     
     // Functions
     
     //first button
-    private func firstbuttonactivated() {
+    private func firstButtonctivated() {
         //Modiyfing background picture first picture
         //FirstPicture.setBackgroundImage(UIImage(named: "bigrectangle"), for: .normal)
         //Hidding second picture
-        SecondPicture.isHidden = true
+        secondPicture.isHidden = true
         
     }
     //Second button
+    private func secondButtonactivated()
+    {
+        fourthPicture.isHidden = true
+        
+    }
+    
     
     //Third button
     
+    private func thirdButtonactivated()
+    {
+        firstPicture.isHidden = false
+        secondPicture.isHidden = false
+        thirdPicture.isHidden = false
+        fourthPicture.isHidden = false
+        
+    }
   
 }
 
