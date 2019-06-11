@@ -15,7 +15,7 @@ class ViewController: UIViewController {
     @IBOutlet weak var SecondPicture: UIButton!
     @IBOutlet weak var ThirdPicture: UIButton!
     @IBOutlet weak var FourthPicture: UIButton!
-    
+    @IBOutlet weak var toswipe: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +24,11 @@ class ViewController: UIViewController {
     
     //Actions
 
-    @IBAction func FirstButton(_ sender: Any) {
+    
+    @IBAction func FirstButton() {
+       firstbuttonactivated()
+       
+        
     }
     
     @IBAction func SecondButton(_ sender: Any) {
@@ -33,5 +37,20 @@ class ViewController: UIViewController {
     @IBAction func ThirdButton(_ sender: Any) {
     }
     
+    // Functions
+    
+    //first button
+    private func firstbuttonactivated() {
+        //Modiyfing background picture first picture
+        //FirstPicture.setBackgroundImage(UIImage(named: "bigrectangle"), for: .normal)
+        //Hidding second picture
+        SecondPicture.isHidden = true
+        
+    }
+    //Second button
+    
+    //Third button
+    
+  
 }
 

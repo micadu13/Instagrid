@@ -253,7 +253,8 @@
                                                 <state key="normal" image="Layout 1" backgroundImage="Layout 1"/>
                                                 <state key="selected" image="Selected" backgroundImage="Layout 1"/>
                                                 <connections>
-                                                    <action selector="FirstButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="KYd-8y-iQG"/>
+                                                    <action selector="FirstButton:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Rea-0Z-uYi"/>
+                                                    <action selector="FirstButtonWith_sender:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5xM-nb-vy6"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="czd-zC-LGa" userLabel="SecondButton">
@@ -401,6 +402,7 @@
                         <outlet property="FourthPicture" destination="Ejv-Ul-4pe" id="Hgm-gz-x8k"/>
                         <outlet property="SecondPicture" destination="ag5-C4-Uc6" id="qkd-p4-deJ"/>
                         <outlet property="ThirdPicture" destination="45Q-xe-h08" id="jXx-Vv-jGQ"/>
+                        <outlet property="toswipe" destination="WGQ-gF-UTI" id="FRP-EY-kvw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
