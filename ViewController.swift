@@ -43,15 +43,18 @@ class ViewController: UIViewController {
     
     //first button
     private func firstButtonctivated() {
-        //Modiyfing background picture first picture
-        //FirstPicture.setBackgroundImage(UIImage(named: "bigrectangle"), for: .normal)
-        //Hidding second picture
+        firstPicture.isHidden = false
         secondPicture.isHidden = true
+        thirdPicture.isHidden = false
+        fourthPicture.isHidden = false
         
     }
     //Second button
     private func secondButtonactivated()
     {
+        firstPicture.isHidden = false
+        secondPicture.isHidden = false
+        thirdPicture.isHidden = false
         fourthPicture.isHidden = true
         
     }
