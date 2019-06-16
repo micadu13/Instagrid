@@ -8,38 +8,40 @@
 
 import UIKit
 
-class ViewController: UIViewController {
-    
+class ViewController: UIViewController, UIImagePickerControllerDelegate {
+ 
     //Outlets
     @IBOutlet weak var firstPicture: UIButton!
     @IBOutlet weak var secondPicture: UIButton!
     @IBOutlet weak var thirdPicture: UIButton!
     @IBOutlet weak var fourthPicture: UIButton!
     @IBOutlet weak var toswipe: UILabel!
-
+    
+    var firstpictchosen:ImagePicker!
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        self.firstpictchosen = ImagePicker(presentationController: self, delegate: self as ImagePickerDelegate)
     }
     
-    //Actions
-
-    @IBAction func FirstPictchosed(_ sender: Any) {
+    
+       //Action to choose pict
+    
+    @IBAction func showImagePickerfirstpict(_ sender: Any) {
+        self.firstpictchosen.present(from: sender as! UIView)
     }
     
-    @IBAction func SecondPictchosed(_ sender: Any) {
-    }
     
-    @IBAction func ThirdPictchosed(_ sender: Any) {
-    }
     
-    @IBAction func FourthPictchosed(_ sender: Any) {
-    }
     
+    
+    
+    
+ //Action for bottom app
     @IBAction func firstButton() {
       firstButtonctivated()
-       
-        
     }
     
     
@@ -85,9 +87,6 @@ class ViewController: UIViewController {
 
 }
 
-
-
-//Taking picture from library - UIImagePickerController
 public protocol ImagePickerDelegate: class {
     func didSelect(image: UIImage?)
 }
@@ -172,3 +171,11 @@ extension ImagePicker: UIImagePickerControllerDelegate {
 extension ImagePicker: UINavigationControllerDelegate {
     
 }
+
+extension ViewController: ImagePickerDelegate {
+    
+    func didSelect(image: UIImage?) {
+        self.firstPicture.image = image
+}
+}
+
