@@ -25,6 +25,31 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(swipedByUser(_:)))
+        swipeGesture.direction = .up
+        self.view.addGestureRecognizer(swipeGesture)
+        
+        
+        
+    }
+    
+    @objc func swipedByUser(_ gesture:UISwipeGestureRecognizer){
+        
+    }
+    
+    func exportgrille(){
+        //implementer la detection du swipe
+        // 1 Instancier le swipe ou gesture recognizer
+        // 2 Configurer le gesture recognizer
+        // 3 Associer le swipe à la grille
+        // 4 Exporter
+    }
+    
+    func share(){
+        //5  Proposer de partager
+    }
+    
+    @IBAction func swipeimage(_ sender: UISwipeGestureRecognizer) {
     }
     
     func factorisation(sender:UIButton){// On reçoit le paramètre sender qui a été envoyé depuis la fonction firstpictchosen
@@ -32,7 +57,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         addImage()
     }
     
- 
+    
     
        //Action to choose pict
     
@@ -66,18 +91,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         self.present(image, animated: true)
     }
     
-   
-    func exportgrille(){
-        //implementer la detection du swipe
-        // 1 Instancier le swipe ou gesture recognizer
-        // 2 Configurer le gesture recognizer
-        // 3 Associer le swipe à la grille
-        // 4 Exporter
-    }
-    
-    func share(){
-        //5  Proposer de partager
-    }
+
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true)
@@ -147,8 +161,6 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         fourthButton.isHidden = false
     }
 
-    @IBAction func swipeimage(_ sender: UISwipeGestureRecognizer) {
-    }
 }
 
 
