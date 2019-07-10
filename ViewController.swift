@@ -21,6 +21,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     @IBOutlet weak var stackgrille: UIView!
     var tagselected:Int?
     
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,22 +29,38 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(swipedByUser(_:)))
         swipeGesture.direction = .up
         self.view.addGestureRecognizer(swipeGesture)
-        
-        
-        
+     
     }
     
     @objc func swipedByUser(_ gesture:UISwipeGestureRecognizer){
-        
+        print("Photos à importer")
+        exportgrille()
     }
     
-    func exportgrille(){
+    
+        func exportgrille()  {
+        UIGraphicsBeginImageContextWithOptions(stackgrille.bounds.size, true, 0)
+        stackgrille.drawHierarchy(in: stackgrille.bounds, afterScreenUpdates: true)
+         let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+            
+            let items = [image]
+            let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
+            present(ac, animated: true)
+    
+        }
+   
+    
         //implementer la detection du swipe
         // 1 Instancier le swipe ou gesture recognizer
         // 2 Configurer le gesture recognizer
         // 3 Associer le swipe à la grille
+        
+        //Creating bitmap-based graphics
+    
+    
         // 4 Exporter
-    }
+    
     
     func share(){
         //5  Proposer de partager
@@ -97,7 +114,6 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         picker.dismiss(animated: true)
         
         if let image = info[.editedImage] as? UIImage{
-            //firstButton.setImage(image, for: .normal)
             
             switch tagselected {
             case 1:
@@ -114,9 +130,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
             }
             
                                                     }
-        
-        
-        
+   
         }
     
     
