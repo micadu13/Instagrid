@@ -26,6 +26,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        // Création d'un swipeGestureRecognizer vers le haut pour permettre de faire l'export et le partage d'images
         let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(swipedByUser(_:)))
         swipeGesture.direction = .up
         self.view.addGestureRecognizer(swipeGesture)
@@ -33,38 +34,46 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     }
     
     @objc func swipedByUser(_ gesture:UISwipeGestureRecognizer){
-        print("Photos à importer")
+        //export de la grille en prenant en compte que nous exportons la grille et que nous faisons appel à la fonction UIGraphicsBeginImageContext pour unir les images puis exporter UIGraphicsGetImageFromCurrentImageContext
+        UIGraphicsBeginImageContextWithOptions(stackgrille.bounds.size, true, 0)
+        stackgrille.drawHierarchy(in: stackgrille.bounds, afterScreenUpdates: true)
+        let image = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        // L'image est d'abord stockée dans une variable "image"
+        let items = [image]
+        let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        present(ac, animated: true)
+        
+        
         exportgrille()
+        //Création de l'animation
+        switch gesture .state {
+        case .began, .changed:
+             UIView.animate(withDuration: 0.5, delay: 1, options: .curveEaseOut, animations: { self.stackgrille.alpha = 0.0})
+        case .ended, .cancelled:
+             UIView.animate(withDuration: 0.5, delay: 1, options: .curveEaseOut, animations: { self.stackgrille.alpha = 1.0})
+        default:
+            break
+        }
     }
     
-    
+        //export de la grille en prenant en compte que nous exportons la grille et que nous faisons appel à la fonction UIGraphicsBeginImageContext pour unir les images puis exporter UIGraphicsGetImageFromCurrentImageContext
         func exportgrille()  {
         UIGraphicsBeginImageContextWithOptions(stackgrille.bounds.size, true, 0)
         stackgrille.drawHierarchy(in: stackgrille.bounds, afterScreenUpdates: true)
          let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-            
+         // L'image est d'abord stockée dans une variable "image"
             let items = [image]
             let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
             present(ac, animated: true)
-    
+        // L'image est ensuite exportée  et partagée via la fonction UIActivityViewController
+            
+           
+            
+            
         }
    
-    
-        //implementer la detection du swipe
-        // 1 Instancier le swipe ou gesture recognizer
-        // 2 Configurer le gesture recognizer
-        // 3 Associer le swipe à la grille
-        
-        //Creating bitmap-based graphics
-    
-    
-        // 4 Exporter
-    
-    
-    func share(){
-        //5  Proposer de partager
-    }
     
     @IBAction func swipeimage(_ sender: UISwipeGestureRecognizer) {
     }
@@ -81,8 +90,8 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     @IBAction func firstpictchosen(_ sender: Any) {//On reçoit le boutton clické en tant que paramètre : sender
         let sent = sender as! UIButton// On va convertir ce paramètre vers un bouton
         factorisation(sender: sent)// On va passer ce boutton à la méthode factorisation qui va l'utiliser pour récupérer le tag
-        
     }
+    // On fait pareil pour les 3 autres dernières images
     
     @IBAction func secondpictchosen(_ sender: Any) {
         let sent = sender as! UIButton
@@ -99,7 +108,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         factorisation(sender: sent)
     }
     
-    
+    // Fonction qui permet de commencer à ajouter une image à la place des boutons en récupérant les photos dans la photothèque
     func addImage() {
         let image = UIImagePickerController()
         image.delegate = self
@@ -109,7 +118,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     }
     
 
-    
+    // permet de récupérer les photos et de les remplacer a la place des boutons
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true)
         
@@ -137,6 +146,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     
 
     //Action for bottom app
+    // Actions sur les bouttons qui permettent de changer la disposition des photos de l'application
     
     @IBAction func firstPosition() {
         firstButtonactivated()
