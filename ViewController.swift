@@ -32,31 +32,45 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         self.view.addGestureRecognizer(swipeGesture)
      
     }
-    
     @objc func swipedByUser(_ gesture:UISwipeGestureRecognizer){
-        //export de la grille en prenant en compte que nous exportons la grille et que nous faisons appel à la fonction UIGraphicsBeginImageContext pour unir les images puis exporter UIGraphicsGetImageFromCurrentImageContext
+    
+        //UIGraphicsBeginImageContextWithOptions(stackgrille.bounds.size, true, 0)
+        //stackgrille.drawHierarchy(in: stackgrille.bounds, afterScreenUpdates: true)
+        //let image = UIGraphicsGetImageFromCurrentImageContext()
+        //UIGraphicsEndImageContext()
+        // L'image est d'abord stockée dans une variable "image"
+        //let items = [image]
+        //let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        //present(ac, animated: true)
+        // L'image est ensuite exportée  et partagée via la fonction UIActivityViewController
+        
+        //exportgrille()
+        //Création de l'animation
         UIGraphicsBeginImageContextWithOptions(stackgrille.bounds.size, true, 0)
         stackgrille.drawHierarchy(in: stackgrille.bounds, afterScreenUpdates: true)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        // L'image est d'abord stockée dans une variable "image"
         let items = [image]
         let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
         present(ac, animated: true)
         
+        let screenWidth = UIScreen.main.bounds.width
+        var translationTransform: CGAffineTransform
         
-        exportgrille()
-        //Création de l'animation
         switch gesture .state {
-        case .began, .changed:
-             UIView.animate(withDuration: 0.5, delay: 1, options: .curveEaseOut, animations: { self.stackgrille.alpha = 0.0})
-        case .ended, .cancelled:
-             UIView.animate(withDuration: 0.5, delay: 1, options: .curveEaseOut, animations: { self.stackgrille.alpha = 1.0})
+        case .began:
+            translationTransform = CGAffineTransform(translationX: screenWidth, y: 0)
+
+             //UIView.animate(withDuration: 0.5, delay: 1, options: .curveEaseOut, animations: { self.stackgrille.alpha = 1.0})
+        case .ended, .cancelled, .failed:
+            translationTransform = CGAffineTransform(translationX: -screenWidth, y: 0)
+
+             //UIView.animate(withDuration: 0.5, delay: 1, options: .curveEaseOut, animations: { self.stackgrille.alpha = 0.0})
         default:
             break
         }
     }
-    
+    /*
         //export de la grille en prenant en compte que nous exportons la grille et que nous faisons appel à la fonction UIGraphicsBeginImageContext pour unir les images puis exporter UIGraphicsGetImageFromCurrentImageContext
         func exportgrille()  {
         UIGraphicsBeginImageContextWithOptions(stackgrille.bounds.size, true, 0)
@@ -68,11 +82,11 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
             let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
             present(ac, animated: true)
         // L'image est ensuite exportée  et partagée via la fonction UIActivityViewController
-            
+ 
            
             
             
-        }
+        }*/
    
     
     @IBAction func swipeimage(_ sender: UISwipeGestureRecognizer) {
