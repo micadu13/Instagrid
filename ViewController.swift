@@ -34,64 +34,40 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     }
     @objc func swipedByUser(_ gesture:UISwipeGestureRecognizer){
     
-        //UIGraphicsBeginImageContextWithOptions(stackgrille.bounds.size, true, 0)
-        //stackgrille.drawHierarchy(in: stackgrille.bounds, afterScreenUpdates: true)
-        //let image = UIGraphicsGetImageFromCurrentImageContext()
-        //UIGraphicsEndImageContext()
-        // L'image est d'abord stockée dans une variable "image"
-        //let items = [image]
-        //let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
-        //present(ac, animated: true)
-        // L'image est ensuite exportée  et partagée via la fonction UIActivityViewController
-        
-        //exportgrille()
-        //Création de l'animation
+        var translationTransform: CGAffineTransform
+        translationTransform = CGAffineTransform(translationX:0, y: -800)
+        UIView.animate(withDuration: 3, animations: {
+            self.stackgrille.transform = translationTransform
+        }, completion: nil)
+    
         UIGraphicsBeginImageContextWithOptions(stackgrille.bounds.size, true, 0)
         stackgrille.drawHierarchy(in: stackgrille.bounds, afterScreenUpdates: true)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         let items = [image]
         let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
-        present(ac, animated: true)
+        //self.present(ac, animated: true)
         
-        let screenWidth = UIScreen.main.bounds.width
-        var translationTransform: CGAffineTransform
-        
-        switch gesture .state {
-        case .began:
-            translationTransform = CGAffineTransform(translationX: screenWidth, y: 0)
-
-             //UIView.animate(withDuration: 0.5, delay: 1, options: .curveEaseOut, animations: { self.stackgrille.alpha = 1.0})
-        case .ended, .cancelled, .failed:
-            translationTransform = CGAffineTransform(translationX: -screenWidth, y: 0)
-
-             //UIView.animate(withDuration: 0.5, delay: 1, options: .curveEaseOut, animations: { self.stackgrille.alpha = 0.0})
-        default:
-            break
+       ac.completionWithItemsHandler = {(activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
+            if !completed {
+                // User canceled
+                print("Hello")
+                
+            }
+            self.present(ac, animated: true)
+            
+            
         }
-    }
-    /*
-        //export de la grille en prenant en compte que nous exportons la grille et que nous faisons appel à la fonction UIGraphicsBeginImageContext pour unir les images puis exporter UIGraphicsGetImageFromCurrentImageContext
-        func exportgrille()  {
-        UIGraphicsBeginImageContextWithOptions(stackgrille.bounds.size, true, 0)
-        stackgrille.drawHierarchy(in: stackgrille.bounds, afterScreenUpdates: true)
-         let image = UIGraphicsGetImageFromCurrentImageContext()
-        UIGraphicsEndImageContext()
-         // L'image est d'abord stockée dans une variable "image"
-            let items = [image]
-            let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
-            present(ac, animated: true)
-        // L'image est ensuite exportée  et partagée via la fonction UIActivityViewController
- 
-           
-            
-            
-        }*/
+        
+        
+        }
+    
    
     
     @IBAction func swipeimage(_ sender: UISwipeGestureRecognizer) {
     }
     
+
     func factorisation(sender:UIButton){// On reçoit le paramètre sender qui a été envoyé depuis la fonction firstpictchosen
         tagselected = sender.tag// On stocke l'identifiant du bouton cliqué
         addImage()
@@ -136,7 +112,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true)
         
-        if let image = info[.editedImage] as? UIImage{
+       if let image =  info[.editedImage] as? UIImage{
             
             switch tagselected {
             case 1:
