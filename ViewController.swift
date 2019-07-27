@@ -109,11 +109,10 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     
 
     // permet de récupérer les photos et de les remplacer a la place des boutons
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true)
         
-       if let image =  info[.editedImage] as? UIImage{
-            
+       if let image =  info[.originalImage] as? UIImage {
             switch tagselected {
             case 1:
                 firstButton.setImage(image, for: .normal)
@@ -129,8 +128,10 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
             }
             
                                                     }
-   
+    
         }
+    
+    
     
     
     
