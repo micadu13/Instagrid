@@ -68,8 +68,8 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     }
     
 
-    func factorisation(sender:UIButton){// On reçoit le paramètre sender qui a été envoyé depuis la fonction firstpictchosen
-        tagselected = sender.tag// On stocke l'identifiant du bouton cliqué
+    func factorisation(sender:UIButton){// We receive the parameter "sender" that has been sent from function firstpictchosen
+        tagselected = sender.tag// We storage the id of the clicked button
         addImage()
     }
     
@@ -77,9 +77,9 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     
        //Action to choose pict
     
-    @IBAction func firstpictchosen(_ sender: Any) {//On reçoit le boutton clické en tant que paramètre : sender
-        let sent = sender as! UIButton// On va convertir ce paramètre vers un bouton
-        factorisation(sender: sent)// On va passer ce boutton à la méthode factorisation qui va l'utiliser pour récupérer le tag
+    @IBAction func firstpictchosen(_ sender: Any) {// We receive the clicked button as parameter : sender
+        let sent = sender as! UIButton// We are are going to convert this parameter through a button
+        factorisation(sender: sent)// We are going to pass the button to the method "factorisation" which is goig to pick up the tag
     }
     // On fait pareil pour les 3 autres dernières images
     
@@ -98,7 +98,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         factorisation(sender: sent)
     }
     
-    // Fonction qui permet de commencer à ajouter une image à la place des boutons en récupérant les photos dans la photothèque
+    //  Function to replace image instead of button
     func addImage() {
         let image = UIImagePickerController()
         image.delegate = self
@@ -108,7 +108,21 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     }
     
 
-    // permet de récupérer les photos et de les remplacer a la place des boutons
+    // MARK: - Swift updated
+    // Helper function inserted by Swift 4.2 migrator.
+    fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
+        return Dictionary<<#Key: Hashable#>, Any>(uniqueKeysWithValues: input.map {(arg) -> <#Result#> in let (key, value) = arg; return (key.rawValue, value)})
+    }
+    
+    // Helper function inserted by Swift 4.2 migrator.
+    fileprivate func convertFromUIImagePickerControllerInfoKey(_ input: UIImagePickerController.InfoKey) -> String {
+        return input.rawValue
+    }
+    
+    guard let selectedImage = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage else {return}
+    
+    
+    // Ablet to take the pictures and to replace it instead of button
    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true)
         
@@ -137,7 +151,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     
 
     //Action for bottom app
-    // Actions sur les bouttons qui permettent de changer la disposition des photos de l'application
+    // Actions to change the view of the app with the buttons
     
     @IBAction func firstPosition() {
         firstButtonactivated()
