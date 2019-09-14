@@ -9,7 +9,7 @@
 import UIKit
 
 class ViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
- 
+    
     
     
     //Outlets
@@ -21,53 +21,65 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     @IBOutlet weak var stackgrille: UIView!
     var tagselected:Int?
     
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        // Création d'un swipeGestureRecognizer vers le haut pour permettre de faire l'export et le partage d'images
+        // Creation of a swipeGestureRecognizer with top direction to put in action to export and share the pictures
+        //Declaration of the method of the swipeGesture recognizer
         let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(swipedByUser(_:)))
+        //Giving the directon of the Swipe Gesture
         swipeGesture.direction = .up
+        //Implementing the method of the Swipe Gesture Recognizer
         self.view.addGestureRecognizer(swipeGesture)
-     
+        
     }
     @objc func swipedByUser(_ gesture:UISwipeGestureRecognizer){
-    
+        let yposition = stackgrille.frame.minY
+        print(yposition)
         var translationTransform: CGAffineTransform
         translationTransform = CGAffineTransform(translationX:0, y: -800)
         UIView.animate(withDuration: 3, animations: {
             self.stackgrille.transform = translationTransform
         }, completion: nil)
-    
+        
+        //Creates a bitmap-based graphics context with the specified options.
         UIGraphicsBeginImageContextWithOptions(stackgrille.bounds.size, true, 0)
         stackgrille.drawHierarchy(in: stackgrille.bounds, afterScreenUpdates: true)
+        //Returns an image based on the contents of the current bitmap-based graphics context.
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         let items = [image]
-        let ac = UIActivityViewController(activityItems: items, applicationActivities: nil)
-        //self.present(ac, animated: true)
+        //Starting UIAcitivyViewController
+        let ac = UIActivityViewController(activityItems: items as [Any], applicationActivities: nil)
         
-       ac.completionWithItemsHandler = {(activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
-            if !completed {
-                // User canceled
-                print("Hello")
-                
-            }
-            self.present(ac, animated: true)
+        ac.completionWithItemsHandler = {(activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
+            
+            //application of the animation of the stack grille in contrary attitude
+            //let screen_height = UIScreen.main.bounds.height
+            var translationTransform: CGAffineTransform
+            //stackgrille is coming back after to its inital position
+            translationTransform = CGAffineTransform(translationX:0, y: yposition)
+            UIView.animate(withDuration: 3, animations: {
+                self.stackgrille.transform = translationTransform
+            }, completion: nil)
+            
             
             
         }
+        self.present(ac, animated: true)
+
         
-        
-        }
+    }
     
-   
+    
+    
     
     @IBAction func swipeimage(_ sender: UISwipeGestureRecognizer) {
     }
     
-
+    
     func factorisation(sender:UIButton){// We receive the parameter "sender" that has been sent from function firstpictchosen
         tagselected = sender.tag// We storage the id of the clicked button
         addImage()
@@ -75,7 +87,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     
     
     
-       //Action to choose pict
+    //Action to choose pict
     
     @IBAction func firstpictchosen(_ sender: Any) {// We receive the clicked button as parameter : sender
         let sent = sender as! UIButton// We are are going to convert this parameter through a button
@@ -107,11 +119,10 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         self.present(image, animated: true)
     }
     
-
     // MARK: - Swift updated
     // Helper function inserted by Swift 4.2 migrator.
     fileprivate func convertFromUIImagePickerControllerInfoKeyDictionary(_ input: [UIImagePickerController.InfoKey: Any]) -> [String: Any] {
-        return Dictionary<<#Key: Hashable#>, Any>(uniqueKeysWithValues: input.map {(arg) -> <#Result#> in let (key, value) = arg; return (key.rawValue, value)})
+        return Dictionary(uniqueKeysWithValues: input.map {key, value in (key.rawValue, value)})
     }
     
     // Helper function inserted by Swift 4.2 migrator.
@@ -119,14 +130,13 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         return input.rawValue
     }
     
-    guard let selectedImage = info[convertFromUIImagePickerControllerInfoKey(UIImagePickerController.InfoKey.originalImage)] as? UIImage else {return}
     
     
-    // Ablet to take the pictures and to replace it instead of button
-   func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+    // Able to take the pictures and to replace it instead of button
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true)
         
-       if let image =  info[.originalImage] as? UIImage {
+        if let image =  info[.originalImage] as? UIImage {
             switch tagselected {
             case 1:
                 firstButton.setImage(image, for: .normal)
@@ -136,20 +146,20 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
                 thirdButton.setImage(image, for: .normal)
             case 4:
                 fourthButton.setImage(image, for: .normal)
-            break
+                break
             default:
                 print("OK")
             }
             
-                                                    }
-    
         }
+        
+    }
     
     
     
     
     
-
+    
     //Action for bottom app
     // Actions to change the view of the app with the buttons
     
@@ -166,13 +176,13 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     @IBAction func thirdPosition() {
         thirdButtonactivated()
     }
-
+    
     func firstButtonactivated () {
         firstButton.isHidden = false
         secondButton.isHidden = true
         thirdButton.isHidden = false
         fourthButton.isHidden = false
-    
+        
     }
     
     func secondButtonactivated()
@@ -189,7 +199,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         thirdButton.isHidden = false
         fourthButton.isHidden = false
     }
-
+    
 }
 
 
