@@ -35,9 +35,14 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         self.view.addGestureRecognizer(swipeGesture)
         
     }
+    
+    //----------------------------------Function to Swipe and export the grid --------------------------------------------------------------
+    
+    
     @objc func swipedByUser(_ gesture:UISwipeGestureRecognizer){
-        let yposition = stackgrille.frame.minY
-        print(yposition)
+        //putting in a constance the position value of the grid
+        let yposition_min = stackgrille.frame.minY
+        //Implementation of the translation
         var translationTransform: CGAffineTransform
         translationTransform = CGAffineTransform(translationX:0, y: -800)
         UIView.animate(withDuration: 3, animations: {
@@ -47,53 +52,43 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         //Creates a bitmap-based graphics context with the specified options.
         UIGraphicsBeginImageContextWithOptions(stackgrille.bounds.size, true, 0)
         stackgrille.drawHierarchy(in: stackgrille.bounds, afterScreenUpdates: true)
+        
         //Returns an image based on the contents of the current bitmap-based graphics context.
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         let items = [image]
+        
         //Starting UIAcitivyViewController
         let ac = UIActivityViewController(activityItems: items as [Any], applicationActivities: nil)
-        
         ac.completionWithItemsHandler = {(activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
-            
-            //application of the animation of the stack grille in contrary attitude
-            //let screen_height = UIScreen.main.bounds.height
-            var translationTransform: CGAffineTransform
-            //stackgrille is coming back after to its inital position
-            translationTransform = CGAffineTransform(translationX:0, y: yposition)
-            UIView.animate(withDuration: 3, animations: {
-                self.stackgrille.transform = translationTransform
-            }, completion: nil)
-            
-            
-            
+        var translationTransform: CGAffineTransform
+        
+        //stackgrille is coming back after to its inital position
+        translationTransform = CGAffineTransform(translationX:0, y: yposition_min)
+        UIView.animate(withDuration: 3, animations: {
+        self.stackgrille.transform = translationTransform
+        }, completion: nil)
+  
         }
         self.present(ac, animated: true)
+   
+    }
+    
+//---------------------------------------------Replacing images to a button-----------------------------------------------------------------
 
-        
-    }
-    
-    
-    
-    
-    @IBAction func swipeimage(_ sender: UISwipeGestureRecognizer) {
-    }
-    
-    
-    func factorisation(sender:UIButton){// We receive the parameter "sender" that has been sent from function firstpictchosen
+//Factorisating the code
+  func factorisation(sender:UIButton){// We receive the parameter "sender" that has been sent from function firstpictchosen
         tagselected = sender.tag// We storage the id of the clicked button
         addImage()
     }
-    
-    
-    
-    //Action to choose pict
+
+//Action to choose pict
     
     @IBAction func firstpictchosen(_ sender: Any) {// We receive the clicked button as parameter : sender
         let sent = sender as! UIButton// We are are going to convert this parameter through a button
         factorisation(sender: sent)// We are going to pass the button to the method "factorisation" which is goig to pick up the tag
     }
-    // On fait pareil pour les 3 autres dernières images
+// We make the same thing for the 3 other pictures
     
     @IBAction func secondpictchosen(_ sender: Any) {
         let sent = sender as! UIButton
@@ -113,8 +108,8 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     //  Function to replace image instead of button
     func addImage() {
         let image = UIImagePickerController()
-        image.delegate = self
-        image.sourceType = .photoLibrary
+        image.delegate = self //implementing delegate function
+        image.sourceType = .photoLibrary // chosing the sourcing with Photolibrary
         image.allowsEditing = true
         self.present(image, animated: true)
     }
@@ -155,11 +150,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         
     }
     
-    
-    
-    
-    
-    
+//------------------------------------------Changing disposition of the app view & appaerance of the view ------------------------------------------------
     //Action for bottom app
     // Actions to change the view of the app with the buttons
     
@@ -176,7 +167,8 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     @IBAction func thirdPosition() {
         thirdButtonactivated()
     }
-    
+
+//---------------------------------------------Parametring disposition of the app thanks to the property "is hidden"-------------------------------
     func firstButtonactivated () {
         firstButton.isHidden = false
         secondButton.isHidden = true
