@@ -45,5 +45,10 @@
 	</array>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>The app wants to use your photos</string>
+	<key>UIAppFonts</key>
+	<array>
+		<string>Delm-Medium.otf</string>
+		<string>ThirstySoftRegular.otf</string>
+	</array>
 </dict>
 </plist>
