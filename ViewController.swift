@@ -17,10 +17,10 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     @IBOutlet weak var secondButton: UIButton!
     @IBOutlet weak var thirdButton: UIButton!
     @IBOutlet weak var fourthButton: UIButton!
-    @IBOutlet weak var toswipe: UILabel!
-    @IBOutlet weak var stackgrille: UIView!
+    @IBOutlet weak var toSwipe: UILabel!
+    @IBOutlet weak var stackGrille: UIView!
     var tagselected:Int?
-    
+    var swipeGesture: UISwipeGestureRecognizer?
     
     
     override func viewDidLoad() {
@@ -33,7 +33,19 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         swipeGesture.direction = .up
         //Implementing the method of the Swipe Gesture Recognizer
         self.view.addGestureRecognizer(swipeGesture)
+        self.swipeGesture = swipeGesture
         
+    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        if UIDevice.current.orientation.isLandscape {
+            print("Landscape")
+            swipeGesture?.direction = .left
+        } else {
+            print("Portrait")
+            swipeGesture?.direction = .up
+        }
     }
     
     //----------------------------------Function to Swipe and export the grid --------------------------------------------------------------
@@ -41,19 +53,15 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     
     @objc func swipedByUser(_ gesture:UISwipeGestureRecognizer){
         //putting in a constance the position value of the grid
-        let yposition_min = stackgrille.frame.minY
+        let yposition_min = stackGrille.frame.minY
         //Implementation of the translation
         animateGridVertically(-800)
         //Creates a bitmap-based graphics context with the specified options.
-        UIGraphicsBeginImageContextWithOptions(stackgrille.bounds.size, true, 0)
-        stackgrille.drawHierarchy(in: stackgrille.bounds, afterScreenUpdates: true)
-        
+        creationBitMap()
         //Returns an image based on the contents of the current bitmap-based graphics context.
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        
         let items = [image]
-        
         //Starting UIAcitivyViewController
         let ac = UIActivityViewController(activityItems: items as [Any], applicationActivities: nil)
         ac.completionWithItemsHandler = {(activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
@@ -67,13 +75,19 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     func animateGridVertically(_ position: CGFloat) {
         var translationTransform: CGAffineTransform
         
-        //stackgrille is coming back after to its inital position
+        //stackGrille is coming back after to its inital position
         translationTransform = CGAffineTransform(translationX:0, y: position)
         UIView.animate(withDuration: 3, animations: {
-            self.stackgrille.transform = translationTransform
+            self.stackGrille.transform = translationTransform
         }, completion: nil)
     
     }
+    
+    func creationBitMap(){
+        UIGraphicsBeginImageContextWithOptions(stackGrille.bounds.size, true, 0)
+        stackGrille.drawHierarchy(in: stackGrille.bounds, afterScreenUpdates: true)
+    }
+  
     
 //---------------------------------------------Replacing images to a button-----------------------------------------------------------------
 
