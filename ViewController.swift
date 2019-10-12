@@ -30,7 +30,13 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         //Declaration of the method of the swipeGesture recognizer
         let swipeGesture = UISwipeGestureRecognizer(target: self, action: #selector(swipedByUser(_:)))
         //Giving the directon of the Swipe Gesture
-        swipeGesture.direction = .up
+        //swipeGesture.direction = .up
+        if UIDevice.current.orientation.isLandscape {
+            swipeGesture.direction = .left
+        }
+        else{
+            swipeGesture.direction = .up
+        }
         //Implementing the method of the Swipe Gesture Recognizer
         self.view.addGestureRecognizer(swipeGesture)
         self.swipeGesture = swipeGesture
@@ -50,28 +56,45 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     
     //----------------------------------Function to Swipe and export the grid --------------------------------------------------------------
     
+    // Adapt disposition of the orientation
     
-    @objc func swipedByUser(_ gesture:UISwipeGestureRecognizer){
-        //putting in a constance the position value of the grid
-        let yposition_min = stackGrille.frame.minY
-        //Implementation of the translation
-        animateGridVertically(-800)
-        //Creates a bitmap-based graphics context with the specified options.
-        creationBitMap()
-        //Returns an image based on the contents of the current bitmap-based graphics context.
+    
+    
+    @objc func swipedByUser(_ gesture:UISwipeGestureRecognizer)
+    {
+        //Swipe according disposition
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
+        
         let items = [image]
-        //Starting UIAcitivyViewController
-        let ac = UIActivityViewController(activityItems: items as [Any], applicationActivities: nil)
-        ac.completionWithItemsHandler = {(activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
-            self.animateGridVertically(yposition_min)
-     }
-        present(ac, animated: true)
-   
+        
+        if UIDevice.current.orientation.isLandscape {
+            animateGridHorizontally(-800)
+            
+            creationBitMap()
+            let ac1 = UIActivityViewController(activityItems: items as [Any], applicationActivities: nil)
+            ac1.completionWithItemsHandler = {(activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
+                self.animateGridHorizontally(0)
+            }
+            present(ac1, animated: true)
+            
+        }
+            
+        else {
+            animateGridVertically(-800)
+            creationBitMap()
+            //Starting UIAcitivyViewController
+            let ac = UIActivityViewController(activityItems: items as [Any], applicationActivities: nil)
+            ac.completionWithItemsHandler = {(activityType: UIActivity.ActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
+                self.animateGridVertically(0)
+            }
+            
+            present(ac, animated: true)
+        }
+        
     }
-
     
+   
     func animateGridVertically(_ position: CGFloat) {
         var translationTransform: CGAffineTransform
         
@@ -80,30 +103,41 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         UIView.animate(withDuration: 3, animations: {
             self.stackGrille.transform = translationTransform
         }, completion: nil)
+        
+    }
     
+    
+    func animateGridHorizontally(_ position : CGFloat){
+        var translationTransform: CGAffineTransform
+        
+        //stackGrille is coming back after to its inital position
+        translationTransform = CGAffineTransform(translationX:position, y:0 )
+        UIView.animate(withDuration: 3, animations: {
+            self.stackGrille.transform = translationTransform
+        }, completion: nil)
     }
     
     func creationBitMap(){
         UIGraphicsBeginImageContextWithOptions(stackGrille.bounds.size, true, 0)
         stackGrille.drawHierarchy(in: stackGrille.bounds, afterScreenUpdates: true)
     }
-  
     
-//---------------------------------------------Replacing images to a button-----------------------------------------------------------------
-
-//Factorisating the code
-  func prepareForImagePicker(sender:UIButton){// We receive the parameter "sender" that has been sent from function firstPictChosen
+    
+    //---------------------------------------------Replacing images to a button-----------------------------------------------------------------
+    
+    //Factorisating the code
+    func prepareForImagePicker(sender:UIButton){// We receive the parameter "sender" that has been sent from function firstPictChosen
         tagselected = sender.tag// We storage the id of the clicked button
         addImage()
     }
-
-//Action to choose pict
+    
+    //Action to choose pict
     
     @IBAction func firstPictChosen(_ sender: Any) {// We receive the clicked button as parameter : sender
         let sent = sender as! UIButton// We are are going to convert this parameter through a button
         prepareForImagePicker(sender: sent)// We are going to pass the button to the method "factorisation" which is goig to pick up the tag
     }
-// We make the same thing for the 3 other pictures
+    // We make the same thing for the 3 other pictures
     
     @IBAction func secondPictChosen(_ sender: Any) {
         let sent = sender as! UIButton
@@ -129,7 +163,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         self.present(image, animated: true)
     }
     
-
+    
     // Able to take the pictures and to replace it instead of button
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
         picker.dismiss(animated: true)
@@ -153,7 +187,7 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
         
     }
     
-//------------------------------------------Changing disposition of the app view & appaerance of the view ------------------------------------------------
+    //------------------------------------------Changing disposition of the app view & appaerance of the view ------------------------------------------------
     //Action for bottom app
     // Actions to change the view of the app with the buttons
     
@@ -170,8 +204,8 @@ class ViewController: UIViewController, UINavigationControllerDelegate, UIImageP
     @IBAction func thirdPosition() {
         thirdButtonActivated()
     }
-
-//---------------------------------------------Parametring disposition of the app thanks to the property "is hidden"-------------------------------
+    
+    //---------------------------------------------Parametring disposition of the app thanks to the property "is hidden"-------------------------------
     func firstButtonActivated () {
         firstButton.isHidden = false
         secondButton.isHidden = true
